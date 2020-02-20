@@ -1,5 +1,6 @@
 void setup(){
-  size(1920, 1080);  //width height
+  fullScreen();
+  //size(displayWidth, displayHeight);  //width height
   background(0,0,255);
 }
 
