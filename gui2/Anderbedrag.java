@@ -2,15 +2,15 @@ import javax.swing.*;
 import java.awt.*; 
 import java.awt.event.*; 
 
-public class Startscherm extends JPanel implements ActionListener{
-    private JButton login;
+public class Anderbedrag extends JPanel implements ActionListener{
+    private JButton afbreken;
     private StringListener textListener;
-public Startscherm(){
+public Anderbedrag(){
     setLayout(new BorderLayout());
 
-    login = new JButton("klik ergens op het scherm op door te gaan");
-    login.addActionListener(this);
-    add(login,BorderLayout.CENTER);
+    afbreken = new JButton("ander bedrag ingevuld");
+    afbreken.addActionListener(this);
+    add(afbreken,BorderLayout.CENTER);
 }
 
 public void setStringListener(StringListener textlistener){
@@ -19,8 +19,8 @@ public void setStringListener(StringListener textlistener){
 
 public void actionPerformed(ActionEvent e){
     JButton clicked = (JButton)e.getSource();
-    if(clicked == login){
-            textListener.textEmitted("login");
+    if(clicked == afbreken){
+            textListener.textEmitted("afbreken");
     }
 
 

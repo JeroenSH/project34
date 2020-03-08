@@ -2,13 +2,13 @@ import javax.swing.*;
 import java.awt.*; 
 import java.awt.event.*; 
 
-public class Startscherm extends JPanel implements ActionListener{
+public class Loginscherm extends JPanel implements ActionListener{
     private JButton login;
     private StringListener textListener;
-public Startscherm(){
+public Loginscherm(){
     setLayout(new BorderLayout());
 
-    login = new JButton("klik ergens op het scherm op door te gaan");
+    login = new JButton("login");
     login.addActionListener(this);
     add(login,BorderLayout.CENTER);
 }
