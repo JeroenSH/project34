@@ -2,9 +2,9 @@ import javax.swing.*;
 import java.awt.*; 
 import java.awt.event.*; 
 
-public class Startscherm extends JPanel implements ActionListener{
-    private JButton login;
-    private JButton taal;
+public class Taal extends JPanel implements ActionListener{
+    private JButton engels;
+    private JButton afbreken;
 
     private Dimension preferredSize;
     private Font font;
@@ -13,7 +13,7 @@ public class Startscherm extends JPanel implements ActionListener{
 
     private StringListener textListener;
 
-public Startscherm(){
+public Taal(){
     setLayout(new GridBagLayout());
 
     preferredSize = new Dimension(400,100);
@@ -22,17 +22,17 @@ public Startscherm(){
     bgcolor = new Color(255,0,0);
     setBackground(bgcolor);
 
-    login = new JButton("klik hier om door te gaan naar het inlogscherm");
-    login.addActionListener(this);
-    login.setPreferredSize(preferredSize);
-    login.setFont(font);
-    login.setBackground(color);
+    engels = new JButton("Engels");
+    engels.addActionListener(this);
+    engels.setPreferredSize(preferredSize);
+    engels.setFont(font);
+    engels.setBackground(color);
 
-    taal = new JButton("Taal");
-    taal.addActionListener(this);
-    taal.setPreferredSize(preferredSize);
-   taal.setFont(font);
-    taal.setBackground(color);
+    afbreken = new JButton("Afbreken");
+    afbreken.addActionListener(this);
+    afbreken.setPreferredSize(preferredSize);
+    afbreken.setFont(font);
+    afbreken.setBackground(color);
     
     GridBagConstraints gc = new GridBagConstraints();
     gc.weightx = 1;
@@ -41,12 +41,12 @@ public Startscherm(){
 ///////////////first row////////////////////////////
     gc.gridx = 0;
     gc.gridy = 0;
-    add(login,gc);
+    add(engels,gc);
     
     ///////////////second row//////////////////
     gc.gridx = 0;
     gc.gridy = 1;
-    add(taal,gc);
+    add(afbreken,gc);
 
 }
 
@@ -56,11 +56,11 @@ public void setStringListener(StringListener textlistener){
 
 public void actionPerformed(ActionEvent e){
     JButton clicked = (JButton)e.getSource();
-    if(clicked == login){
-            textListener.textEmitted("login");
-    } else if(clicked == taal){
-        textListener.textEmitted("taal");
-}
+    if(clicked == engels){
+            textListener.textEmitted("engels");
+    } else if(clicked == afbreken){
+        textListener.textEmitted("afbreken");
+    }
 
 
 }

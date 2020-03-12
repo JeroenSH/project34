@@ -10,29 +10,42 @@ public class Keuzemenu extends JPanel implements ActionListener{
     private JLabel tekst;
 
     private Dimension preferredSize;
+    private Font font;
+    private Color color;
+    private Color bgcolor;
     
     private StringListener textListener;
-
+    
     public Keuzemenu() {
         setLayout(new GridBagLayout());
-        Dimension preferredSize = new Dimension(200,100);
+        preferredSize = new Dimension(400,100);
+        font = new Font("Arial", Font.PLAIN, 40);
+        color = new Color(0,255,0);
+        bgcolor = new Color(255,0,0);
+        setBackground(bgcolor);
 
+        
         // maak buttons aan
-        saldo = new JButton("saldo");                       //saldo
+        saldo = new JButton("Saldo");                       //saldo
         saldo.addActionListener(this);
         saldo.setPreferredSize(preferredSize);
+        saldo.setFont(font);
+        saldo.setBackground(color);
 
-        bedrag = new JButton("bedrag opnemen");                 //bedrag opnemen
+        bedrag = new JButton("Bedrag opnemen");                 //bedrag opnemen
         bedrag.addActionListener(this);
         bedrag.setPreferredSize(preferredSize);
+        bedrag.setFont(font);
+        bedrag.setBackground(color);
 
-        afbreken = new JButton("afbreken");                     //afbreken
+        afbreken = new JButton("Afbreken");                     //afbreken
         afbreken.addActionListener(this);
         afbreken.setPreferredSize(preferredSize);
-
+        afbreken.setFont(font);
+        afbreken.setBackground(color);
         //   maak tekst aan
-        tekst = new JLabel("maak uw keuze");                            //aanpassen voor verschillende talen
-
+        tekst = new JLabel("Maak uw keuze");                            //aanpassen voor verschillende talen
+        tekst.setFont(font);
        
         final GridBagConstraints gc = new GridBagConstraints();
 

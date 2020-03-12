@@ -6,22 +6,26 @@ public class MysqlDatabase{
     static String rhost;
     static int rport;
     public Connection connection; 
+    private String name;
 
     public MysqlDatabase(){
-        lport = 3306;
+        lport = 8306;
         rhost = "localhost";
-        String url = "jdbc:mysql://" + rhost +":" + lport + "/";
+        String url = "mysql://" + rhost +":" + lport + "/";
         String db = "DeMuur";
-        String options = "?useLegacyDateTimeCode=false&serverTimezone=Europe/Amsterdam";
-        String dbUser = "root"; //Username mysql (beveiligd)
+       // String options = "?useLegacyDateTimeCode=false&serverTimezone=Europe/Amsterdam";
+        String dbUser = "ubuntu-0982632"; //Username mysql (beveiligd)
         String dbPasswd = "SetNewP@ssW0rd";   //Password mysql (beveiligd)
         try{
-            connection = DriverManager.getConnection(url+db+options, dbUser, dbPasswd);
+
+            //connection = DriverManager.getConnection(url+db+options, dbUser, dbPasswd);
+            connection = DriverManager.getConnection(url+db, dbUser, dbPasswd);
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
+
     public static void go(){
         String user = "ubuntu-0982632";   //Username server (beveiligd)
         String password = "ExtraVeilig";   //wachtwoord server (beveiligd)
@@ -67,7 +71,7 @@ public class MysqlDatabase{
           Statement st = con.createStatement();
           String sql = "SELECT * FROM gegevens";
           ResultSet rset = st.executeQuery(sql);
-          System.out.println("Total number of records = " + rowCount);
+          //System.out.println("Total number of records = " + rowCount);
           }
           catch (SQLException s){
           System.out.println("SQL statement is not executed!");
@@ -79,7 +83,6 @@ public class MysqlDatabase{
           }
 
           public String readName(String ID){
-            String name;
             try{
                 Statement st= connection.createStatement();
                 String sql = "SELECT NAAM FROM gegeves WHERE ID = '" + ID + "'";

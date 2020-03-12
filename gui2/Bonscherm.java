@@ -8,25 +8,38 @@ public class Bonscherm extends JPanel implements ActionListener {
 
     private JLabel tekst;
 
-    private StringListener textListener;
     private Dimension preferredSize;
+    private Font font;
+    private Color color;
+    private Color bgcolor;
+
+    private StringListener textListener;
 
     public Bonscherm() {
         setLayout(new GridBagLayout());
-        Dimension preferredSize = new Dimension(200, 100);
+        preferredSize = new Dimension(200, 100);
+        font = new Font("Arial", Font.PLAIN, 40);
+        color = new Color(0, 255, 0);
+        bgcolor = new Color(255, 0, 0);
+        setBackground(bgcolor);
 
         // maak de buttons aan
-        wel = new JButton("ja");                                                            //wel bon button
+        wel = new JButton("ja"); // wel bon button
         wel.addActionListener(this);
         wel.setPreferredSize(preferredSize);
+        wel.setFont(font);
+        wel.setBackground(color);
 
-        niet = new JButton("nee");                                                          //geen bon button
+        niet = new JButton("nee"); // geen bon button
         niet.addActionListener(this);
         niet.setPreferredSize(preferredSize);
+        niet.setFont(font);
+        niet.setBackground(color);
 
-        //maak tekst aan
+        // maak tekst aan
         tekst = new JLabel("wilt u de bon");
-
+        tekst.setFont(font);
+        
         final GridBagConstraints gc = new GridBagConstraints();
         gc.weightx = 1;
         gc.weighty = 1;
@@ -35,7 +48,7 @@ public class Bonscherm extends JPanel implements ActionListener {
         gc.gridx = 0;
         gc.gridy = 0;
         gc.gridwidth = 2;
-        add(tekst,gc);
+        add(tekst, gc);
         /////////// second row//////////////
         gc.gridwidth = 1;
         gc.gridy = 1;

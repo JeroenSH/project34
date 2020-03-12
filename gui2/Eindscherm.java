@@ -2,9 +2,9 @@ import javax.swing.*;
 import java.awt.*; 
 import java.awt.event.*; 
 
-public class Startscherm extends JPanel implements ActionListener{
-    private JButton login;
-    private JButton taal;
+public class Eindscherm extends JPanel implements ActionListener{
+    
+    private JLabel eindtekst;
 
     private Dimension preferredSize;
     private Font font;
@@ -12,27 +12,16 @@ public class Startscherm extends JPanel implements ActionListener{
     private Color bgcolor;
 
     private StringListener textListener;
-
-public Startscherm(){
+public Eindscherm(){
     setLayout(new GridBagLayout());
-
     preferredSize = new Dimension(400,100);
     font = new Font("Arial", Font.PLAIN, 40);
     color = new Color(0,255,0);
     bgcolor = new Color(255,0,0);
     setBackground(bgcolor);
 
-    login = new JButton("klik hier om door te gaan naar het inlogscherm");
-    login.addActionListener(this);
-    login.setPreferredSize(preferredSize);
-    login.setFont(font);
-    login.setBackground(color);
-
-    taal = new JButton("Taal");
-    taal.addActionListener(this);
-    taal.setPreferredSize(preferredSize);
-   taal.setFont(font);
-    taal.setBackground(color);
+    eindtekst = new JLabel("Bedankt voor het pinnen bij DeMuur");
+    eindtekst.setFont(font);
     
     GridBagConstraints gc = new GridBagConstraints();
     gc.weightx = 1;
@@ -41,29 +30,17 @@ public Startscherm(){
 ///////////////first row////////////////////////////
     gc.gridx = 0;
     gc.gridy = 0;
-    add(login,gc);
+    add(eindtekst,gc);
     
-    ///////////////second row//////////////////
-    gc.gridx = 0;
-    gc.gridy = 1;
-    add(taal,gc);
-
 }
 
 public void setStringListener(StringListener textlistener){
     this.textListener = textlistener;
 }
 
+
 public void actionPerformed(ActionEvent e){
     JButton clicked = (JButton)e.getSource();
-    if(clicked == login){
-            textListener.textEmitted("login");
-    } else if(clicked == taal){
-        textListener.textEmitted("taal");
 }
-
-
-}
-
 }
 
