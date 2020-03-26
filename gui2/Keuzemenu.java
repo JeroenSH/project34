@@ -6,7 +6,7 @@ public class Keuzemenu extends JPanel implements ActionListener{
     private final JButton saldo;
     private final JButton bedrag;
     private final JButton afbreken;
-
+    private final JButton snelKeuze;
     private JLabel tekst;
 
     private Dimension preferredSize;
@@ -43,6 +43,12 @@ public class Keuzemenu extends JPanel implements ActionListener{
         afbreken.setPreferredSize(preferredSize);
         afbreken.setFont(font);
         afbreken.setBackground(color);
+
+        snelKeuze = new JButton("snel 70,-");                       //snelkeuze
+        snelKeuze.addActionListener(this);
+        snelKeuze.setPreferredSize(preferredSize);
+        snelKeuze.setFont(font);
+        snelKeuze.setBackground(color);
         //   maak tekst aan
         tekst = new JLabel("Maak uw keuze");                            //aanpassen voor verschillende talen
         tekst.setFont(font);
@@ -71,6 +77,9 @@ public class Keuzemenu extends JPanel implements ActionListener{
         gc.gridy = 2;
         add(afbreken, gc);
 
+        gc.gridx = 1;
+        add(snelKeuze,gc);
+
     }
 
     public void setStringListener(final StringListener textlistener) {
@@ -85,6 +94,8 @@ public class Keuzemenu extends JPanel implements ActionListener{
         textListener.textEmitted("keuzebedrag");
     }else if (clicked == afbreken){
         textListener.textEmitted("afbreken");
+    } else if (clicked == snelKeuze){
+        textListener.textEmitted("70");
     }
 
 

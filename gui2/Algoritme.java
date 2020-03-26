@@ -13,7 +13,7 @@ public class Algoritme extends JFrame {
     private Bonscherm bon;
     private Eindscherm eindScherm;
     private Taal taal;
-
+    private Mysqlverbinding sql;
     private Timer timer;
 
     private int counter;
@@ -31,6 +31,7 @@ public class Algoritme extends JFrame {
         bon = new Bonscherm();
         eindScherm = new Eindscherm();
         taal = new Taal();
+        Mysqlverbinding sql = new Mysqlverbinding();
 
         startScherm.setStringListener(new StringListener() {
             public void textEmitted(String text) {
@@ -52,7 +53,7 @@ public class Algoritme extends JFrame {
                 if (text.toLowerCase().trim().equals("afbreken")) {
                     add(startScherm, BorderLayout.CENTER);
                 } else if (text.toLowerCase().trim().equals("engels")) {
-                   // add(taal, BorderLayout.CENTER);
+                    // add(taal, BorderLayout.CENTER);
                 }
 
                 revalidate(); // teken hem opnieuw
@@ -80,11 +81,11 @@ public class Algoritme extends JFrame {
                     add(keuzeBedrag, BorderLayout.CENTER);
                 } else if (text.toLowerCase().trim().equals("saldo")) {
                     add(saldo, BorderLayout.CENTER);
-                }
-                if (text.toLowerCase().trim().equals("afbreken")) {
+                } else if (text.toLowerCase().trim().equals("afbreken")) {
                     add(startScherm, BorderLayout.CENTER);
+                } else if (text.toLowerCase().trim().equals("70")) {
+                    add(bon, BorderLayout.CENTER);
                 }
-
                 revalidate(); // teken hem opnieuw
                 repaint();
 
@@ -170,18 +171,11 @@ public class Algoritme extends JFrame {
     }
 
     public void einde() {
+        getContentPane().removeAll();
         add(eindScherm, BorderLayout.CENTER);
         revalidate();
         repaint();
         delay(5);
-        add(startScherm,BorderLayout.CENTER);
-        revalidate();
-        repaint();
-
-        // add(startScherm,BorderLayout.CENTER);
-        // revalidate();
-        // repaint();
-
     }
 
     public void delay(int tijd) {
@@ -192,6 +186,10 @@ public class Algoritme extends JFrame {
             @Override
             public void actionPerformed(ActionEvent event) {
                 if (counter == 0) {
+                    getContentPane().removeAll();
+                    add(startScherm, BorderLayout.CENTER);
+                    revalidate();
+                    repaint();
                     timer.stop();
                 } else {
                     counter--;

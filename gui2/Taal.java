@@ -18,8 +18,8 @@ public Taal(){
 
     preferredSize = new Dimension(400,100);
     font = new Font("Arial", Font.PLAIN, 40);
-    color = new Color(0,255,0);
-    bgcolor = new Color(255,0,0);
+    color = new Color(255,150,0);
+    bgcolor = new Color(255,255,255);
     setBackground(bgcolor);
 
     engels = new JButton("Engels");
