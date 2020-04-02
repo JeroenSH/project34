@@ -15,10 +15,15 @@ public class Algoritme extends JFrame {
     private Taal taal;
     private Mysqlverbinding sql;
     private Timer timer;
+    private Geensaldo geenSaldo;
 
     private int counter;
     private int delay;
-
+    private String sqlKrijgSaldo;
+    private String sqlveranderSaldo;
+    private String RFIDnmr = null;
+    private int balance;
+    private int daglimiet;
     public Algoritme() {
         super("gui voor DeMuur");
         setLayout(new BorderLayout());
@@ -31,34 +36,39 @@ public class Algoritme extends JFrame {
         bon = new Bonscherm();
         eindScherm = new Eindscherm();
         taal = new Taal();
-        Mysqlverbinding sql = new Mysqlverbinding();
+        sql = new Mysqlverbinding();
+        geenSaldo = new Geensaldo();
+
 
         startScherm.setStringListener(new StringListener() {
             public void textEmitted(String text) {
                 getContentPane().removeAll(); // maak de JFrame leeg
                 if (text.toLowerCase().trim().equals("login")) {
                     add(login, BorderLayout.CENTER);
+                    //krijg het RFID nummer van arduino en sla hem op
+                    RFIDnmr = "'12378'";
+                    getBalance();
                 } else if (text.toLowerCase().trim().equals("taal")) {
                     add(taal, BorderLayout.CENTER);
+
                 }
 
                 revalidate(); // teken hem opnieuw
                 repaint();
-
             }
+
         });
         taal.setStringListener(new StringListener() {
             public void textEmitted(String text) {
                 getContentPane().removeAll(); // maak de JFrame leeg
                 if (text.toLowerCase().trim().equals("afbreken")) {
-                    add(startScherm, BorderLayout.CENTER);
+                einde();
                 } else if (text.toLowerCase().trim().equals("engels")) {
                     // add(taal, BorderLayout.CENTER);
                 }
 
                 revalidate(); // teken hem opnieuw
                 repaint();
-
             }
         });
 
@@ -73,6 +83,7 @@ public class Algoritme extends JFrame {
                 repaint();
 
             }
+
         });
         keuzeMenu.setStringListener(new StringListener() {
             public void textEmitted(String text) {
@@ -80,36 +91,60 @@ public class Algoritme extends JFrame {
                 if (text.toLowerCase().trim().equals("keuzebedrag")) {
                     add(keuzeBedrag, BorderLayout.CENTER);
                 } else if (text.toLowerCase().trim().equals("saldo")) {
-                    add(saldo, BorderLayout.CENTER);
+                    saldo.setSaldo(getBalance());
+                    saldo.settings();
+                   add(saldo, BorderLayout.CENTER);
+
+
                 } else if (text.toLowerCase().trim().equals("afbreken")) {
-                    add(startScherm, BorderLayout.CENTER);
+                    einde();
                 } else if (text.toLowerCase().trim().equals("70")) {
-                    add(bon, BorderLayout.CENTER);
-                }
+                    if(balance >= 70) {
+                        add(bon, BorderLayout.CENTER);
+                        balance -= 70;
+                    } else{
+                       add(geenSaldo,BorderLayout.CENTER);
+                    }
+                    }
                 revalidate(); // teken hem opnieuw
                 repaint();
-
             }
+
         });
         keuzeBedrag.setStringListener(new StringListener() {
             public void textEmitted(String text) {
                 getContentPane().removeAll(); // maak de JFrame leeg
 
                 if (text.toLowerCase().trim().equals("afbreken")) {
-                    add(startScherm, BorderLayout.CENTER);
+                    einde();
                 } else if (text.toLowerCase().trim().equals("anderbedrag")) {
                     add(anderBedrag, BorderLayout.CENTER);
-                } else if (text.toLowerCase().trim().equals("vastbedrag")) {
-                    add(bon, BorderLayout.CENTER);
-                }
-                if (text.toLowerCase().trim().equals("menu")) {
+                } else if (text.toLowerCase().trim().equals("menu")) {
                     add(keuzeMenu, BorderLayout.CENTER);
+                }  else if (Integer.parseInt(text) <= balance) {
+                    if (text.toLowerCase().trim().equals("20")) {
+                        add(bon, BorderLayout.CENTER);
+                        balance -= 20;
+                    } else if (text.toLowerCase().trim().equals("50")) {
+                        add(bon, BorderLayout.CENTER);
+                        balance -= 50;
+                    } else if (text.toLowerCase().trim().equals("70")) {
+                        add(bon, BorderLayout.CENTER);
+                        balance -= 70;
+                    } else if (text.toLowerCase().trim().equals("100")) {
+                        add(bon, BorderLayout.CENTER);
+                        balance -= 100;
+                    }
+                } else{
+                    add(geenSaldo,BorderLayout.CENTER);
                 }
+                changeBalance();
 
                 revalidate(); // teken hem opnieuw
                 repaint();
 
             }
+
         });
 
         anderBedrag.setStringListener(new StringListener() {
@@ -117,7 +152,25 @@ public class Algoritme extends JFrame {
                 getContentPane().removeAll(); // maak de JFrame leeg
 
                 if (text.toLowerCase().trim().equals("afbreken")) {
-                    add(startScherm, BorderLayout.CENTER);
+                    einde();
+
+                } else if (text.toLowerCase().trim().equals("menu")) {
+                    add(keuzeMenu, BorderLayout.CENTER);
+                }
+
+                revalidate(); // teken hem opnieuw
+                repaint();
+
+            }
+
+        });
+        geenSaldo.setStringListener(new StringListener() {
+            public void textEmitted(String text) {
+                getContentPane().removeAll(); // maak de JFrame leeg
+
+                if (text.toLowerCase().trim().equals("afbreken")) {
+                    einde();
+
                 } else if (text.toLowerCase().trim().equals("menu")) {
                     add(keuzeMenu, BorderLayout.CENTER);
                 }
@@ -127,6 +180,7 @@ public class Algoritme extends JFrame {
 
             }
         });
+
         bon.setStringListener(new StringListener() {
             public void textEmitted(String text) {
                 getContentPane().removeAll(); // maak de JFrame leeg
@@ -144,20 +198,20 @@ public class Algoritme extends JFrame {
 
             }
 
+
         });
         saldo.setStringListener(new StringListener() {
             public void textEmitted(String text) {
                 getContentPane().removeAll(); // maak de JFrame leeg
 
                 if (text.toLowerCase().trim().equals("afbreken")) {
-                    add(startScherm, BorderLayout.CENTER);
-                } else if (text.toLowerCase().trim().equals("menu")) {
+                    einde();
+                }else if (text.toLowerCase().trim().equals("menu")) {
                     add(keuzeMenu, BorderLayout.CENTER);
                 }
 
                 revalidate(); // teken hem opnieuw
                 repaint();
-
             }
         });
 
@@ -181,7 +235,6 @@ public class Algoritme extends JFrame {
     public void delay(int tijd) {
         counter = tijd;
         delay = 1000;
-
         ActionListener action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -201,4 +254,21 @@ public class Algoritme extends JFrame {
         timer.setInitialDelay(0);
         timer.start();
     }
+    public int getBalance(){
+        sqlKrijgSaldo = "select saldo from bank where RFIDnumber = " + RFIDnmr + ";";
+        System.out.println(sqlKrijgSaldo);
+        sql.setQuery(sqlKrijgSaldo);
+        balance = sql.getSqlData();
+        System.out.println("balance: " + balance);
+        return sql.getSqlData();
+    }
+
+    public void changeBalance(){
+        sqlveranderSaldo = "UPDATE bank SET saldo = " + balance + " WHERE RFIDNUMBER = " + RFIDnmr + ";";
+        System.out.println(sqlveranderSaldo);
+        sql.setQuery(sqlveranderSaldo);
+        sql.changeSqlData();
+        }
+
+
 }

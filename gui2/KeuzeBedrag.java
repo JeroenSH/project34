@@ -131,8 +131,16 @@ public class KeuzeBedrag extends JPanel implements ActionListener {
             textListener.textEmitted("anderbedrag");
         } else if (clicked == menu) {
             textListener.textEmitted("menu");
-        } else {
-            textListener.textEmitted("vastbedrag");
+        } else if (clicked == twintig){
+            textListener.textEmitted("20");
+        }else if (clicked == vijftig){
+            textListener.textEmitted("50");
+        }else if (clicked == zeventig){
+            textListener.textEmitted("70");
+        }else if (clicked == honderd){
+            textListener.textEmitted("100");
         }
+
+        // twintig vijftig zeventig honderd
     }
 }

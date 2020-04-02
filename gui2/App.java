@@ -1,4 +1,3 @@
-import java.util.Date;
 import javax.swing.SwingUtilities;
 
 public class App {

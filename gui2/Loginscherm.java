@@ -11,7 +11,7 @@ public class Loginscherm extends JPanel implements ActionListener {
 
     private int count;
     private boolean geblokkeerd = false;
-    private String password = "1111";
+    private String password = "1234";
     private Color bgcolor;
     private Color color;
     private Font font;
