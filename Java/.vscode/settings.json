@@ -1,0 +1,12 @@
+{
+    "java.dependency.packagePresentation": "hierarchical",
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "c:\\Program Files\\Java\\jdk1.8.0_231\\com.jcraft.jsch-all-1.0.6.release.jar"
+        ],
+        "exclude": [
+            "lib/jsch-0.1.55.jar"
+        ]
+    }
+}
