@@ -16,6 +16,7 @@ public class Geensaldo extends JPanel implements ActionListener {
         private StringListener textListener;
 
         public Geensaldo() {
+                setOpaque(false);
                 setLayout(new GridBagLayout());
                 preferredSize = new Dimension(200, 100);
                 font = new Font("Arial", Font.PLAIN, 40);
@@ -37,7 +38,7 @@ public class Geensaldo extends JPanel implements ActionListener {
                 menu.setBackground(color);
 
                 // maak tekst aan
-                tekst = new JLabel("Onvoldoende saldo");
+                tekst = new JLabel("Onvoldoende saldo of daglimiet bereikt");
                 tekst.setFont(font);
 
                 final GridBagConstraints gc = new GridBagConstraints();

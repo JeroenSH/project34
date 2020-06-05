@@ -13,6 +13,7 @@ public class Eindscherm extends JPanel implements ActionListener{
 
     private StringListener textListener;
 public Eindscherm(){
+    setOpaque(false);
     setLayout(new GridBagLayout());
     preferredSize = new Dimension(400,100);
     font = new Font("Arial", Font.PLAIN, 40);

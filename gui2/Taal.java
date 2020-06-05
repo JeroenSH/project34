@@ -14,6 +14,7 @@ public class Taal extends JPanel implements ActionListener{
     private StringListener textListener;
 
 public Taal(){
+    setOpaque(false);
     setLayout(new GridBagLayout());
 
     preferredSize = new Dimension(400,100);

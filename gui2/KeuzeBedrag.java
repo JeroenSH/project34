@@ -21,6 +21,7 @@ public class KeuzeBedrag extends JPanel implements ActionListener {
     private StringListener textListener;
 
     public KeuzeBedrag() {
+        setOpaque(false);
         setLayout(new GridBagLayout());
         preferredSize = new Dimension(200, 100);
         font = new Font("Arial", Font.PLAIN, 40);

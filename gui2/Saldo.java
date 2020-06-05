@@ -16,11 +16,12 @@ public class Saldo extends JPanel implements ActionListener{
     private String x;
 
     private StringListener textListener;
-public Saldo(){
-}
+public Saldo(){}
 
 public void settings() {
+
     removeAll();
+    setOpaque(false);
     setLayout(new GridBagLayout());
     preferredSize = new Dimension(400, 100);
     font = new Font("Arial", Font.PLAIN, 40);

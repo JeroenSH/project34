@@ -1,6 +1,8 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*; 
-import java.awt.event.*; 
+import java.awt.event.*;
+import java.io.*;
 
 public class Startscherm extends JPanel implements ActionListener{
     private JButton login;
@@ -10,19 +12,20 @@ public class Startscherm extends JPanel implements ActionListener{
     private Font font;
     private Color color;
     private Color bgcolor;
-
     private StringListener textListener;
 
-public Startscherm(){
+public Startscherm() {
+    setOpaque(false);
     setLayout(new GridBagLayout());
-
     preferredSize = new Dimension(400,100);
     font = new Font("Arial", Font.PLAIN, 40);
     color = new Color(0,255,0);
-    bgcolor = new Color(255,0,0);
-    setBackground(bgcolor);
 
-    login = new JButton("klik hier om door te gaan naar het inlogscherm");
+
+  //  bgcolor = new Color(255,0,0);
+  //  setBackground(bgcolor);
+
+    login = new JButton("Start");
     login.addActionListener(this);
     login.setPreferredSize(preferredSize);
     login.setFont(font);
@@ -46,8 +49,9 @@ public Startscherm(){
     ///////////////second row//////////////////
     gc.gridx = 0;
     gc.gridy = 1;
-    add(taal,gc);
+   // add(taal,gc);
 
+   // add(new JLabel(new ImageIcon("Achtergrond.jpg")));
 }
 
 public void setStringListener(StringListener textlistener){

@@ -16,6 +16,7 @@ public class Bonscherm extends JPanel implements ActionListener {
     private StringListener textListener;
 
     public Bonscherm() {
+        setOpaque(false);
         setLayout(new GridBagLayout());
         preferredSize = new Dimension(200, 100);
         font = new Font("Arial", Font.PLAIN, 40);

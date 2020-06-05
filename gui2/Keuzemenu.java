@@ -17,6 +17,7 @@ public class Keuzemenu extends JPanel implements ActionListener{
     private StringListener textListener;
     
     public Keuzemenu() {
+        setOpaque(false);
         setLayout(new GridBagLayout());
         preferredSize = new Dimension(400,100);
         font = new Font("Arial", Font.PLAIN, 40);
